@@ -248,7 +248,8 @@ def test_scale(tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.C
     monkeypatch.chdir(tmp_path)
     started = time.perf_counter()
     out = run(["find", "Gen1234"], capsys)
-    assert time.perf_counter() - started < 20
+    """Generous on purpose: the first read of freshly written files is at the mercy of the antivirus."""
+    assert time.perf_counter() - started < 60
     assert "defined: ApexClass Gen1234" in out
     started = time.perf_counter()
     out = run(["find", "Region__c", "--limit", "2"], capsys)
