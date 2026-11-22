@@ -1,0 +1,19 @@
+[project]
+name = "syn"
+version = "0.1.0"
+description = "Token-lean command line toolbox for Salesforce metadata repos"
+requires-python = ">=3.12"
+dependencies = []
+
+[project.scripts]
+syn = "syn.cli:main"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["syn"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
