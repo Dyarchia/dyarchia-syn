@@ -332,4 +332,4 @@ def test_help_lists_each_command_once() -> None:
 
     text = build_parser().format_help()
     assert text.count("rows,set,add") == 0 and text.count("  diff ") == 1
-    assert text.startswith("usage: syn [-h] COMMAND ...")
+    assert text.startswith("usage: syn [-h] [--version] COMMAND ...")

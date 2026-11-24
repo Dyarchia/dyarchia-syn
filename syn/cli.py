@@ -13,11 +13,14 @@ import importlib
 import os
 import sys
 
+from . import __version__
+
 MODULES = ("tables", "flow", "diff", "find", "org")
 
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="syn", description="Salesforce metadata, cheap to read and to change.")
+    parser.add_argument("--version", action="version", version=f"syn {__version__}")
     subparsers = parser.add_subparsers(dest="command", required=True, metavar="COMMAND")
     for name in MODULES:
         importlib.import_module(f"syn.{name}").register(subparsers)
