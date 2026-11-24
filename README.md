@@ -1,35 +1,28 @@
 # syn
 
 A command line toolbox that reads and changes Salesforce metadata with far less text than `cat`, `grep`
-and hand-edited XML. There is no model inside: it is plain code, made to be called from a terminal by a
-person or by a coding agent of any harness.
+and hand-edited XML. No AI inside: plain code, for a person or for a coding agent of any harness.
 
-## Install
+## Install on Windows
 
-Windows, no Python needed:
+No Python needed. Open PowerShell and paste this line:
 
 ```powershell
-irm https://raw.githubusercontent.com/Dyarchia/syn/main/install.ps1 | iex
+irm https://raw.githubusercontent.com/Dyarchia/dyarchia-syn/main/install.ps1 | iex
 ```
 
-It unpacks the latest release into `%LOCALAPPDATA%\Programs\syn` and adds that folder to the user PATH.
-Run it again to update. Only Windows builds are published and tested so far.
+Close the terminal, open a new one, and check with `syn --version`. To update, paste the line again.
+To uninstall, delete `%LOCALAPPDATA%\Programs\syn`.
 
-From source, with Python 3.12 or newer and no dependencies:
+## Use it
 
-```bash
-py -m pip install -e .
-```
-
-## Commands
-
-Run them from the root of an SFDX project. `syn COMMAND --help` gives the exact syntax.
+Run it from the root of a Salesforce DX project. `syn COMMAND --help` gives the exact syntax.
 
 ```text
 Command                       What it prints or does
 ----------------------------  ----------------------------------------------------------------
 syn map                       One-screen overview of the repository
-syn find NAME                 Where a name is defined and who mentions it, grouped by type
+syn find NAME                 Where a name is defined and who mentions it
 syn rows FILE [BLOCK]         The repeated blocks of a metadata XML file as a table
 syn set FILE BLOCK KEY F=V    Change fields of one row; only the bytes of that row change
 syn add FILE BLOCK F=V        Add a row
@@ -45,20 +38,15 @@ syn org                       One line per authenticated org
 
 - `FILE` may be a quoted glob: one command reads or changes many profiles or permission sets.
 - `find` and `map` keep an index in `.syn/` at the repository root; add it to `.gitignore`.
-- `tests` and `errors` read JSON that the Salesforce CLI (`sf`) wrote, and `org` asks `sf` for its list of
-  orgs. No command deploys or changes anything in an org.
+- No command deploys or changes anything in an org.
 
-## Tell an agent about it
+To let a coding agent use it, tell it in its instructions file that `syn` exists and to prefer it over
+reading XML.
 
-Put `syn` on the agent's PATH and add a few lines to its instructions file: that the command exists, the
-list above, and to prefer it over reading XML.
+## From source
 
-## Tests
-
-```bash
-py -m pytest -q
-```
+Python 3.12 or newer, no dependencies. `py -m pip install -e .` and `py -m pytest -q`.
 
 ## License
 
-Apache-2.0. See `LICENSE`.
+Apache-2.0. See [LICENSE](LICENSE) and [NOTICE](NOTICE).
